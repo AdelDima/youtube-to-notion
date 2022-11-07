@@ -136,7 +136,7 @@ export default function Home() {
                       lineHeight={1.1}
                       fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
                     >
-                      Connect to Notio
+                      Connect to Notion
                     </Heading>
                     <Text color={textColor} fontSize={{ base: "sm", sm: "md" }}>
                       Import playlist from Youtube to Notion database is very
