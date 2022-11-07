@@ -8,8 +8,17 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>Youtube Playlist To Notion</title>
-        <meta charSet="utf-8" />
         <Favicon />
+        <meta property="og:title" content="Youtube Playlist To Notion" />
+        <meta
+          property="og:description"
+          content="Watch your favorite Youtube playlist without leaving Notion."
+        />
+        <meta
+          name="description"
+          content="Watch your favorite Youtube playlist without leaving Notion."
+        />
+        <meta charSet="utf-8" />
       </Head>
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
