@@ -97,6 +97,7 @@ export default function Home() {
         <Flex align={"center"} justify={"center"} id="app">
           <VStack spacing={10} align="center" textAlign={"center"}>
             <Heading
+              as="h1"
               lineHeight={1.1}
               fontSize={{ base: "3xl", sm: "4xl", md: "5xl", lg: "7xl" }}
             >
