@@ -2,12 +2,37 @@
 
 // 1. import `extendTheme` function
 import {
+  createMultiStyleConfigHelpers,
   defineStyle,
   defineStyleConfig,
   extendTheme,
   withDefaultColorScheme,
   type ThemeConfig,
 } from "@chakra-ui/react";
+import { switchAnatomy } from "@chakra-ui/anatomy";
+
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(switchAnatomy.keys);
+
+const baseStyle = definePartsStyle({
+  // define the part you're going to style
+
+  thumb: {
+    bg: "gray.500",
+    _checked: {
+      bg: "gray.100",
+    },
+  },
+  track: {
+    bg: "gray.50",
+    _checked: {
+      bg: "#e16259",
+    },
+  },
+
+});
+
+export const switchTheme = defineMultiStyleConfig({ baseStyle });
 
 const notionButton = defineStyle({
   background: "#e16259",
@@ -34,7 +59,7 @@ const theme = extendTheme(
   {
     config,
   },
-  { components: { Button: buttonTheme } }
+  { components: { Button: buttonTheme, Switch: switchTheme } }
 );
 
 export default theme;

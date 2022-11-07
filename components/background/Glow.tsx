@@ -12,11 +12,10 @@ const Glow: React.FC<IGlow> = ({ ...glowProps }) => {
         src={glow_homepage}
         className="max-w-none origin-top scale-150"
         alt=""
-        width="2510"
-        height="1168"
         decoding="async"
         loading="lazy"
         data-nimg="future"
+        // fill
       />
     </Box>
   );

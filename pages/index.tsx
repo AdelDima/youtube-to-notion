@@ -18,6 +18,7 @@ import {
 
 import Header from "../components/navigation/Header";
 import NotionAddApiForm from "../components/forms/notion/NotionAddApiForm";
+import YModel from "../components/navigation/Modal/YModel";
 import { motion } from "framer-motion";
 import Glow from "../components/background/Glow";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
@@ -35,7 +36,7 @@ const NotionIcon = (props: any) => (
 );
 // export default theme;
 export default function Home() {
-  const [checkedItems, setCheckedItems] = useState([false, false]);
+  const [checkedItems, setCheckedItems] = useState([true, true]);
   const supabase = useSupabaseClient();
   const session = useSession();
   const textColor = useColorModeValue("gray.500", "gray.400");
@@ -84,7 +85,7 @@ export default function Home() {
     authEvent: getAuthEvent(),
   };
   return (
-    <Box position={"relative"} className="h-screen">
+    <Box position={"relative"} className="h-screen lg:h-full">
       <Header />
       <Container
         as={SimpleGrid}
@@ -111,6 +112,7 @@ export default function Home() {
             <Text color={textColor} fontSize={{ base: "sm", sm: "md" }}>
               Watch your favorite Youtube playlist without leaving Notion !
             </Text>
+            <YModel />
             <motion.div
               variants={variants} // Pass the variant object into Framer Motion
               initial="hidden" // Set the initial state to variants.hidden
@@ -149,11 +151,10 @@ export default function Home() {
                     <Divider mb={10} />
 
                     <Flex justifyContent={"center"} mb={10}>
-
                       <Text mr="5">Connect to Notion using API </Text>
                       <Switch
                         isChecked={checkedItems[0]}
-                        colorScheme="teal"
+                        colorScheme="switchTheme"
                         size="lg"
                         onChange={(e) => {
                           // console.log(e.target.value);
