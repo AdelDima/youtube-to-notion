@@ -77,6 +77,9 @@ export default function Home() {
   async function signIn() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "notion",
+      options: {
+        redirectTo: 'https://youtube-to-notion.vercel.app/'
+      }
     });
     if (data && !error) true;
   }
