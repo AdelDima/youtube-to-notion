@@ -78,11 +78,12 @@ export default function Home() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "notion",
       options: {
-        redirectTo: 'https://youtube-to-notion.vercel.app/'
-      }
+        redirectTo: window.location.origin,
+      },
     });
     if (data && !error) true;
   }
+
   let props = {
     session: session,
     authEvent: getAuthEvent(),
