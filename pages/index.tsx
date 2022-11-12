@@ -25,6 +25,7 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Account from "../components/forms/notion/NotionWithAuth";
 import { Icon, createIcon } from "@chakra-ui/react";
 import { useState } from "react";
+import Head from "next/head";
 
 const NotionIcon = (props: any) => (
   <Icon viewBox="0 0 24 24" {...props}>
@@ -89,107 +90,119 @@ export default function Home() {
     authEvent: getAuthEvent(),
   };
   return (
-    <Box position={"relative"} className="h-screen lg:h-full">
-      <Header />
-      <Container
-        as={SimpleGrid}
-        maxW={"7xl"}
-        columns={{ base: 1, md: 1 }}
-        spacing={{ base: 10, lg: 32 }}
-        py={{ base: 10, sm: 20, lg: 32 }}
-      >
-        <Flex align={"center"} justify={"center"} id="app">
-          <VStack spacing={10} align="center" textAlign={"center"}>
-            <Heading
-              as="h1"
-              lineHeight={1.1}
-              fontSize={{ base: "3xl", sm: "4xl", md: "5xl", lg: "7xl" }}
-            >
-              <Text
-                as={"span"}
-                bgGradient="linear(to-r, red.400,red.600)"
-                bgClip="text"
-              >
-                Youtube
-              </Text>{" "}
-              Playlist To Notion
-            </Heading>
-            <Text color={textColor} fontSize={{ base: "sm", sm: "md" }}>
-              Watch your favorite Youtube playlist without leaving Notion !
-            </Text>
-            <YModel />
-            <motion.div
-              variants={variants} // Pass the variant object into Framer Motion
-              initial="hidden" // Set the initial state to variants.hidden
-              animate="enter" // Animated state to variants.enter
-              exit="exit" // Exit state (used later) to variants.exit
-              transition={{ ease: "easeOut" }}
-              className="w-full max-w-3xl flex justify-center"
-            >
-              <Stack
-                className={boxBg}
-                rounded={"xl"}
-                p={{ base: 4, sm: 6, md: 8 }}
-                spacing={{ base: 8 }}
-                maxW={{ lg: "lg" }}
-              >
-                {!session ? (
-                  <Stack spacing={4}>
-                    <Heading
-                      color={headingColor}
-                      lineHeight={1.1}
-                      fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
-                    >
-                      Connect to Notion
-                    </Heading>
-                    <Text color={textColor} fontSize={{ base: "sm", sm: "md" }}>
-                      Import playlist from Youtube to Notion database is very
-                      easy now !
-                    </Text>
-                  </Stack>
-                ) : (
-                  []
-                )}
-                ;
-                {!session ? (
-                  <Box>
-                    <Divider mb={10} />
+    <>
+      <Head>
+      <title>Youtube Playlist To Notion</title>
+      </Head>
 
-                    <Flex justifyContent={"center"} mb={10}>
-                      <Text mr="5">Connect to Notion using API </Text>
-                      <Switch
-                        isChecked={checkedItems[0]}
-                        colorScheme="switchTheme"
-                        size="lg"
-                        onChange={(e) => {
-                          // console.log(e.target.value);
-                          console.log(e.target.checked);
-                          setCheckedItems([e.target.checked, e.target.checked]);
-                        }}
-                      />
-                    </Flex>
-                    {checkedItems[0] ? (
-                      <Button
-                        variant="notionButton"
-                        onClick={() => signIn()}
-                        leftIcon={<NotionIcon boxSize={6} />}
+      <Box position={"relative"} className="h-screen lg:h-full">
+        <Header />
+        <Container
+          as={SimpleGrid}
+          maxW={"7xl"}
+          columns={{ base: 1, md: 1 }}
+          spacing={{ base: 10, lg: 32 }}
+          py={{ base: 10, sm: 20, lg: 32 }}
+        >
+          <Flex align={"center"} justify={"center"} id="app">
+            <VStack spacing={10} align="center" textAlign={"center"}>
+              <Heading
+                as="h1"
+                lineHeight={1.1}
+                fontSize={{ base: "3xl", sm: "4xl", md: "5xl", lg: "7xl" }}
+              >
+                <Text
+                  as={"span"}
+                  bgGradient="linear(to-r, red.400,red.600)"
+                  bgClip="text"
+                >
+                  Youtube
+                </Text>{" "}
+                Playlist To Notion
+              </Heading>
+              <Text color={textColor} fontSize={{ base: "sm", sm: "md" }}>
+                Watch your favorite Youtube playlist without leaving Notion !
+              </Text>
+              <YModel />
+              <motion.div
+                variants={variants} // Pass the variant object into Framer Motion
+                initial="hidden" // Set the initial state to variants.hidden
+                animate="enter" // Animated state to variants.enter
+                exit="exit" // Exit state (used later) to variants.exit
+                transition={{ ease: "easeOut" }}
+                className="w-full max-w-3xl flex justify-center"
+              >
+                <Stack
+                  className={boxBg}
+                  rounded={"xl"}
+                  p={{ base: 4, sm: 6, md: 8 }}
+                  spacing={{ base: 8 }}
+                  maxW={{ lg: "lg" }}
+                >
+                  {!session ? (
+                    <Stack spacing={4}>
+                      <Heading
+                        color={headingColor}
+                        lineHeight={1.1}
+                        fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
                       >
-                        {" "}
-                        Connect with Notion
-                      </Button>
-                    ) : (
-                      <NotionAddApiForm />
-                    )}
-                  </Box>
-                ) : (
-                  <Account {...props} />
-                )}
-              </Stack>
-            </motion.div>
-          </VStack>
-        </Flex>
-        <Glow />
-      </Container>
-    </Box>
+                        Connect to Notion
+                      </Heading>
+                      <Text
+                        color={textColor}
+                        fontSize={{ base: "sm", sm: "md" }}
+                      >
+                        Import playlist from Youtube to Notion database is very
+                        easy now !
+                      </Text>
+                    </Stack>
+                  ) : (
+                    []
+                  )}
+                  ;
+                  {!session ? (
+                    <Box>
+                      <Divider mb={10} />
+
+                      <Flex justifyContent={"center"} mb={10}>
+                        <Text mr="5">Connect to Notion using API </Text>
+                        <Switch
+                          isChecked={checkedItems[0]}
+                          colorScheme="switchTheme"
+                          size="lg"
+                          onChange={(e) => {
+                            // console.log(e.target.value);
+                            console.log(e.target.checked);
+                            setCheckedItems([
+                              e.target.checked,
+                              e.target.checked,
+                            ]);
+                          }}
+                        />
+                      </Flex>
+                      {checkedItems[0] ? (
+                        <Button
+                          variant="notionButton"
+                          onClick={() => signIn()}
+                          leftIcon={<NotionIcon boxSize={6} />}
+                        >
+                          {" "}
+                          Connect with Notion
+                        </Button>
+                      ) : (
+                        <NotionAddApiForm />
+                      )}
+                    </Box>
+                  ) : (
+                    <Account {...props} />
+                  )}
+                </Stack>
+              </motion.div>
+            </VStack>
+          </Flex>
+          <Glow />
+        </Container>
+      </Box>
+    </>
   );
 }

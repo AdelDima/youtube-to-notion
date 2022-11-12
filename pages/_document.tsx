@@ -7,7 +7,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Youtube Playlist To Notion</title>
         <Favicon />
         <meta property="og:title" content="Youtube Playlist To Notion" />
         <meta
