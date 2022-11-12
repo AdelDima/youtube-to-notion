@@ -30,20 +30,3 @@ export async function addVideoToDB(
   }
   return _data;
 }
-
-// export async function notionSearch(
-//   query: string,
-//   token: string,
-// ) {
-//     const res = await fetch("api/notionSearch", {
-//       method: "POST",
-//       body: JSON.stringify({
-//         key: query,
-//         token: '',
-//       }),
-//       headers: {
-//         "Access-Control-Allow-Origin": "*",
-//         "Content-Type": "application/json",
-//       },
-//     });
-// }
