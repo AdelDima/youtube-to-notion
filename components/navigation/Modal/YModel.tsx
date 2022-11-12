@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { FaPlayCircle } from "react-icons/fa";
+import Image from 'next/image'
 
 export interface IYModel {}
 const YModel: React.FC<IYModel> = ({ ...glowProps }) => {
@@ -37,9 +38,9 @@ const YModel: React.FC<IYModel> = ({ ...glowProps }) => {
       <Flex gap={5}>
         <a
           href="https://www.producthunt.com/posts/youtube-playlist-to-notion?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-youtube&#0045;playlist&#0045;to&#0045;notion"
-          target="_blank"
+          target="_blank" rel="noreferrer"
         >
-          <img
+          <Image
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=366369&theme=dark"
             alt="Youtube&#0032;Playlist&#0032;To&#0032;Notion - Watch&#0032;your&#0032;favorite&#0032;Youtube&#0032;playlist&#0032;without&#0032;leaving&#0032;Notion | Product Hunt"
             width="190"
