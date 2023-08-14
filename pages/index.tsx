@@ -11,9 +11,7 @@ import {
   Button,
   Divider,
   Switch,
-  Center,
-  Grid,
-  Spacer,
+  Icon,
 } from "@chakra-ui/react";
 
 import Header from "../components/navigation/Header";
@@ -23,7 +21,6 @@ import { motion } from "framer-motion";
 import Glow from "../components/background/Glow";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Account from "../components/forms/notion/NotionWithAuth";
-import { Icon, createIcon } from "@chakra-ui/react";
 import { useState } from "react";
 import Head from "next/head";
 
