@@ -1,5 +1,10 @@
 {
-    "cSpell.words": [
-        "supabase"
-    ]
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true, // Tell VSCode to format files on save
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  } // Tell VSCode to use Prettier as default file formatter
 }
