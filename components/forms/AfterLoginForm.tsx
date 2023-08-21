@@ -85,7 +85,6 @@ export function AfterLoginForm() {
       const response = await axios.post(url, data, { headers });
       return response.data.notion_response.id;
     } catch (error) {
-      console.log(error)
       if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
         handleErrorResponse(error.response?.data.message || error.message)
       }

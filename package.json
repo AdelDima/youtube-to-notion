@@ -48,7 +48,7 @@
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.6",
     "typescript": "5.1.6",
-    "youtubei.js": "^5.8.0"
+    "youtubei.js": "6.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.4.0",
