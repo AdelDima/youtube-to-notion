@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NextResponse } from 'next/server'
 import { Client, isNotionClientError, LogLevel } from '@notionhq/client'
 import { extractNotionDbIdFromUrl } from '@/lib/utils'

@@ -5,6 +5,8 @@ import SupabaseProvider from '@/components/providers/supabase-context'
 import SupabaseAuthProvider from '@/components/providers/supabase-auth-provider'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
+//Fix DynamicServerError: Dynamic server usage: cookies : https://github.com/vercel/next.js/issues/49373
+export const dynamic = 'force-dynamic'
 
 const inter = Inter({ subsets: ['latin'] })
 

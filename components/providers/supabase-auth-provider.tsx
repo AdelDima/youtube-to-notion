@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client'
 
 import { Session } from '@supabase/supabase-js'
@@ -20,8 +20,8 @@ const Context = createContext<ContextI>({
   error: null,
   isLoading: true,
   mutate: null,
-  signOut: async () => {},
-  signInWithNotion: async () => {},
+  signOut: async () => { },
+  signInWithNotion: async () => { },
 })
 
 export default function SupabaseAuthProvider({

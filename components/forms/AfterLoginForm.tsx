@@ -55,7 +55,7 @@ export function AfterLoginForm() {
 
   type ValidationSchema = z.infer<typeof formSchema>
   const form = useForm<ValidationSchema>({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     resolver: zodResolver(formSchema as any),
     defaultValues: {
       playlist: '',
@@ -64,7 +64,7 @@ export function AfterLoginForm() {
   })
 
   async function addPlaylistHomePage(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     info: any,
     token: string,
     notion_db_id: string,
@@ -97,7 +97,7 @@ export function AfterLoginForm() {
   }
 
   async function addPlaylistDatabase(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     info: any,
     token: string,
     notion_db_id: string
@@ -223,10 +223,10 @@ export function AfterLoginForm() {
         }
 
         const _data = response.data;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         const videos = new Map<string, any>(Object.entries(_data.videos))
         let vids: IVideo[] = []
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         // let finalRes: Promise<AxiosResponse<any, any>>
         // setProgress by the number of videos in the playlist
         videos.forEach(async (video) => {
@@ -275,7 +275,7 @@ export function AfterLoginForm() {
         } {
           return
         }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       } catch (error: any | Error) {
         toast({
           variant: 'destructive',
