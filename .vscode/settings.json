@@ -6,5 +6,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[dotenv]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   } // Tell VSCode to use Prettier as default file formatter
 }

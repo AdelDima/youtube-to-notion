@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react'
 import { Switch } from '@/components/ui/switch'
 import { extractNotionDbIdFromUrl } from '@/lib/utils'
 import { useSupabase } from '@/components/providers/supabase-context'
+import axios from 'axios';
 
 export function AfterLoginForm() {
   const { supabase } = useSupabase()
@@ -69,26 +70,30 @@ export function AfterLoginForm() {
     notion_db_id: string,
     playlistId: string
   ) {
-    let response
-    const res = await fetch('api/notion/add-playlist-homepage', {
-      method: 'POST',
-      body: JSON.stringify({
-        playlistId: playlistId,
-        info: info,
-        notion_db_id: notion_db_id,
-        token: token,
-      }),
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
-    })
-    response = res
-    if (!res.ok) {
-      done()
-    }
+    const url = 'api/notion/add-playlist-homepage';
+    const data = {
+      playlistId: playlistId,
+      info: info,
+      notion_db_id: notion_db_id,
+      token: token,
+    };
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    };
+    return axios.post(url, data, { headers })
+      .then((response) => {
+        return response.data.notion_response.id;
+      })
+      .catch((error) => {
+        handleErrorResponse(error);
+        return '';
+      });
+  }
 
-    return response
+  interface ValidationError {
+    message: string;
+    errors: Record<string, string[]>
   }
 
   async function addPlaylistDatabase(
@@ -96,31 +101,32 @@ export function AfterLoginForm() {
     info: any,
     token: string,
     notion_db_id: string
-  ) {
-    let response
-    const res = await fetch('api/notion/create-playlist-db', {
-      method: 'POST',
-      body: JSON.stringify({
-        title: info.title,
-        author: info.author.name,
-        thumbnails: info.thumbnails,
-        total_items: info.total_items,
-        last_updated: info.last_updated,
-        description: info.description,
-        notion_db_id: notion_db_id,
-        token: token,
-      }),
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
-    })
-    response = res
-    if (!res.ok) {
-      done()
-    }
+  ): Promise<string> {
+    const url = 'api/notion/create-playlist-db';
+    const data = {
+      title: info.title,
+      author: info.author.name,
+      thumbnails: info.thumbnails,
+      total_items: info.total_items,
+      last_updated: info.last_updated,
+      description: info.description,
+      notion_db_id: notion_db_id,
+      token: token,
+    };
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    };
 
-    return response
+    try {
+      const response = await axios.post(url, data, { headers });
+      return response.data.notion_response.id
+    } catch (error) {
+      if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
+        handleErrorResponse(error.message)
+      }
+      return ''
+    }
   }
 
   /**
@@ -135,32 +141,30 @@ export function AfterLoginForm() {
     token: string,
     notion_db_id: string
   ) {
-    let response
     const progressStep = 100 / vids.length
     for (const vid of vids.reverse()) {
-      const res = await fetch('api/notion/add-videos-to-playlist-db', {
-        method: 'POST',
-        body: JSON.stringify({
-          id: vid.id,
-          duration: vid.duration,
-          title: vid.title,
-          thumbnails: vid.thumbnails,
-          notion_db_id: notion_db_id,
-          token: token,
-        }),
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
-      })
-      response = res
-      if (!res.ok) {
-        done()
-        break
-      }
-      setProgress((prev) => prev + progressStep)
+      const url = 'api/notion/add-videos-to-playlist-db';
+      const data = {
+        id: vid.id,
+        duration: vid.duration,
+        title: vid.title,
+        thumbnails: vid.thumbnails,
+        notion_db_id: notion_db_id,
+        token: token,
+      };
+      const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      };
+
+      await axios.post(url, data, { headers }).then(() => {
+        setProgress((prev) => prev + progressStep)
+      }).catch((error) => {
+        handleErrorResponse(error)
+        return false
+      });
     }
-    return response
+    return true
   }
 
   // crease done function stop loading and set progress to 0
@@ -206,19 +210,24 @@ export function AfterLoginForm() {
       }
 
       try {
-        const res = await fetch(
-          `api/youtube/get-playlist?playlist=${playlist_id}`
-        )
-        if (!res.ok) {
-          handleErrorResponse('Playlist not found')
-          resolve()
-          return
+        const response = await axios.get(`api/youtube/get-playlist`, {
+          params: {
+            playlist: playlist_id,
+          },
+        });
+
+        if (response.status !== 200) {
+          handleErrorResponse('Playlist not found');
+          resolve();
+          return; // Return early after handling error
         }
-        const _data = await res.json()
+
+        const _data = response.data;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const videos = new Map<string, any>(Object.entries(_data.videos))
         let vids: IVideo[] = []
-        let finalRes: Response | undefined
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // let finalRes: Promise<AxiosResponse<any, any>>
         // setProgress by the number of videos in the playlist
         videos.forEach(async (video) => {
           const vid: IVideo = {
@@ -232,55 +241,38 @@ export function AfterLoginForm() {
         })
 
         // add playlist home page to Notion
-        finalRes = await addPlaylistHomePage(
+        const homePageId = await addPlaylistHomePage(
           _data.info,
           user?.provider_token || '',
           values.database_id,
           playlist_id
         )
 
-        if (!finalRes!.ok) {
-          const data = await finalRes?.json()
-          handleErrorResponse(data.error)
-          resolve()
+        if (!homePageId) {
           return
         }
 
-        const _res = await finalRes?.json()
-        const homePageId = _res.notion_response.id
-
-        finalRes = await addPlaylistDatabase(
+        const playlistId = await addPlaylistDatabase(
           _data.info,
           user?.provider_token || '',
           homePageId
         )
 
-        if (!finalRes!.ok) {
-          const data = await finalRes?.json()
-          handleErrorResponse(data.error)
+        if (!playlistId) {
           resolve()
           return
         }
 
-        const __res = await finalRes?.json()
-        const playlistId = __res.notion_response.id
-
-        finalRes = await addPlaylistToNotion(
+        const finalNotionRes = await addPlaylistToNotion(
           vids,
           user?.provider_token || '',
           playlistId
         )
-
-        if (finalRes!.ok) {
+        if (finalNotionRes) {
           toast({
             description: 'Imported successfully! 😊',
           })
-          done()
-          resolve()
-        } else {
-          const data = await finalRes?.json()
-          handleErrorResponse(data.error)
-          resolve()
+        } {
           return
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

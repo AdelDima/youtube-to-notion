@@ -30,6 +30,7 @@
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "axios": "^1.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "eslint": "8.47.0",
@@ -37,7 +38,7 @@
     "framer-motion": "^10.16.0",
     "lucide": "^0.268.0",
     "lucide-react": "^0.268.0",
-    "next": "13.4.15",
+    "next": "13.4.19",
     "next-themes": "^0.2.1",
     "postcss": "8.4.27",
     "react": "18.2.0",
@@ -47,15 +48,14 @@
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.6",
     "typescript": "5.1.6",
-    "youtubei.js": "^5.8.0",
-    "zod": "^3.22.2"
+    "youtubei.js": "^5.8.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "axios": "^1.4.0",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
     "prettier": "^3.0.2",
-    "swr": "^2.2.1"
+    "swr": "^2.2.1",
+    "zod": "^3.22.2"
   }
 }
