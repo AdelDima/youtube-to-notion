@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     if (status) {
       return NextResponse.json({ notion_response }, { status: 200 })
     } else {
-      return NextResponse.json({ error: notion_response }, { status: 500 })
+      return NextResponse.json({ message: notion_response }, { status: 500 })
     }
   } catch (error: unknown) {
     if (isNotionClientError(error)) {

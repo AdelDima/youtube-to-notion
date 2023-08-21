@@ -81,14 +81,16 @@ export function AfterLoginForm() {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     };
-    return axios.post(url, data, { headers })
-      .then((response) => {
-        return response.data.notion_response.id;
-      })
-      .catch((error) => {
-        handleErrorResponse(error);
-        return '';
-      });
+    try {
+      const response = await axios.post(url, data, { headers });
+      return response.data.notion_response.id;
+    } catch (error) {
+      console.log(error)
+      if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
+        handleErrorResponse(error.response?.data.message || error.message)
+      }
+      return ''
+    }
   }
 
   interface ValidationError {
