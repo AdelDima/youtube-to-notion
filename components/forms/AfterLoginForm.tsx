@@ -212,11 +212,14 @@ export function AfterLoginForm() {
       }
 
       try {
-        const response = await axios.get(`api/youtube/get-playlist`, {
-          params: {
-            playlist: playlist_id,
-          },
-        });
+        const data = {
+          playlist: playlist_id
+        };
+        const headers = {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        };
+        const response = await axios.post(`api/youtube/get-playlist`, data, { headers });
 
         if (response.status !== 200) {
           handleErrorResponse('Playlist not found');
