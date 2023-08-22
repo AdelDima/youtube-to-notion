@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { Innertube } from 'youtubei.js'
+import { Innertube } from 'youtubei.js/web'
 
 export async function POST(request: Request) {
   const res = await request.json()
