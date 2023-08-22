@@ -13,6 +13,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { AspectRatio } from './ui/aspect-ratio'
+import { Youtube } from 'lucide-react'
+import { Badge } from "@/components/ui/badge"
+
 const formVariants = {
   hidden: {
     opacity: 0,
@@ -41,15 +44,20 @@ export function Y2NSection() {
         animate="visible"
         exit="exit"
       >
-        <h1 className="text-5xl antialiased">Youtube Playlist To Notion</h1>
+        <h1 className="text-5xl antialiased text-center">Youtube Playlist To Notion <Badge variant="outline" className='absolute'>2.0</Badge></h1>
         <p className="antialiased text-muted-foreground">
           Watch your favorite Youtube playlist without leaving Notion !
         </p>
 
         <div className="space-x-4 pb-8 pt-4 md:pb-10">
           <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline">See How it Work?</Button>
+            <DialogTrigger asChild className='place-content-center'>
+              <div className='flex flex-col gap-2'>
+                <a href="https://www.producthunt.com/posts/youtube-playlist-to-notion-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-youtube&#0045;playlist&#0045;to&#0045;notion&#0045;2&#0045;0" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=410974" /></a>
+                <Button variant="outline">
+                  <Youtube className="w-5 h-5 mr-2" />
+                  See How it Work?</Button>
+              </div>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
@@ -58,7 +66,7 @@ export function Y2NSection() {
                   <AspectRatio ratio={16 / 9}>
                     <iframe
                       title="How to use it"
-                      src="https://www.youtube.com/embed/IWFG7fSCWb4"
+                      src="https://www.youtube.com/embed/-u2IF5FV5ww"
                       width="100%"
                       height="100%"
                     />
