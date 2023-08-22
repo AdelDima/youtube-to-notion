@@ -304,6 +304,9 @@ export function AfterLoginForm() {
     })
     done()
   }
+
+  const handleFocus = (event: { target: { select: () => any } }) => event.target.select();
+
   return (
     <Form {...form}>
       <form
@@ -357,6 +360,7 @@ export function AfterLoginForm() {
                 <FormControl>
                   <Input
                     disabled={isLoading}
+                    onFocus={handleFocus}
                     placeholder="https://www.notion.so/fc42b..."
                     {...field}
                     required
