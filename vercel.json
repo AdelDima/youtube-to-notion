@@ -1,4 +1,5 @@
 {
+  "installCommand": "pnpm install --shamefully-hoist",
   "git": {
     "deploymentEnabled": {
       "dev": false
