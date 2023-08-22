@@ -25,7 +25,7 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.4",
     "@supabase/auth-helpers-nextjs": "^0.7.4",
-    "@supabase/supabase-js": "^2.32.0",
+    "@supabase/supabase-js": "^2.33.0",
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
@@ -35,7 +35,7 @@
     "clsx": "^2.0.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
-    "framer-motion": "^10.16.0",
+    "framer-motion": "^10.16.1",
     "lucide": "^0.268.0",
     "lucide-react": "^0.268.0",
     "next": "13.4.19",
@@ -51,8 +51,8 @@
     "youtubei.js": "6.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "@typescript-eslint/parser": "^6.4.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
     "encoding": "^0.1.13",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
