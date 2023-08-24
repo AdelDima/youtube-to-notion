@@ -1,3 +1,5 @@
+'use client'
+
 import { JSX, SVGProps } from 'react'
 import { Button } from './ui/button'
 import { useAuth } from '@/components/providers/supabase-auth-provider'
@@ -14,6 +16,7 @@ const NotionIcon = (
 )
 
 export function Login() {
+
   const { signInWithNotion } = useAuth()
   return (
     <Button className="w-full" onClick={signInWithNotion}>
