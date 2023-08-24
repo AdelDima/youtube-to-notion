@@ -15,6 +15,7 @@ interface ContextI {
   mutate: any
   signOut: () => Promise<void>
   signInWithNotion: () => Promise<void>
+  reconnectToNotion: () => Promise<void>
   refreshToken: () => Promise<void>
 }
 const Context = createContext<ContextI>({
@@ -24,6 +25,7 @@ const Context = createContext<ContextI>({
   mutate: null,
   signOut: async () => { },
   signInWithNotion: async () => { },
+  reconnectToNotion: async () => { },
   refreshToken: async () => { },
 })
 
@@ -70,12 +72,25 @@ export default function SupabaseAuthProvider({
     await supabase.auth.signInWithOAuth({ provider: 'notion' })
   }
 
+  const reconnectToNotion = async () => {
+    try {
+      // Remove local token if it exists
+      await localStorage.removeItem('provider_token');
+      // Attempt to reconnect to Notion after removing token
+      await signInWithNotion();
+    } catch (error) {
+      console.error('Error during reconnection:', error);
+    }
+  }
+
+
   async function refreshToken() {
     try {
       const local_provider_token = localStorage.getItem('provider_token') as string;
       const db_provider_token = user?.provider_token as string;
       if (local_provider_token === db_provider_token) {
-        toast({ title: 'Token already up to date' })
+        await localStorage.removeItem('provider_token');
+        toast({ title: '👌 Token already up to date. If you wish to authenticate, please reconnect to Notion' })
         return;
       }
       if (!local_provider_token) {
@@ -90,6 +105,9 @@ export default function SupabaseAuthProvider({
       if (error) {
         toast({ variant: 'destructive', title: error.message })
         throw new Error('Error refreshing session');
+      } else {
+        toast({ title: '✅ Notion Token updated' })
+        return;
       }
     } catch (error) {
       console.error('Error refreshing session:', error);
@@ -102,7 +120,7 @@ export default function SupabaseAuthProvider({
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
-        localStorage.setItem('provider_token', session?.provider_token || '')
+        localStorage.setItem('provider_token', session?.provider_token as string)
       }
       if (session?.access_token !== serverSession?.access_token) {
         router.refresh()
@@ -121,6 +139,7 @@ export default function SupabaseAuthProvider({
     mutate,
     signOut,
     signInWithNotion,
+    reconnectToNotion,
     refreshToken
   }
 

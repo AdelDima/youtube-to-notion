@@ -56,6 +56,13 @@ export function Header() {
           >
             Templates
           </a>
+          <a
+            href="https://dimalab.notion.site/Documentation-68db4e30a3634a48833d2037d0299985?pvs=4"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            target="_blank"
+          >
+            Documentation
+          </a>
         </nav>
         <nav className="flex items-center mx-6">
           <a

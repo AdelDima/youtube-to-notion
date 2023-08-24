@@ -53,7 +53,6 @@ export function Y2NSection() {
           <Dialog>
             <DialogTrigger asChild className='place-content-center'>
               <div className='flex flex-col gap-2'>
-                <a href="https://www.producthunt.com/posts/youtube-playlist-to-notion-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-youtube&#0045;playlist&#0045;to&#0045;notion&#0045;2&#0045;0" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=410974" /></a>
                 <Button variant="outline">
                   <Youtube className="w-5 h-5 mr-2" />
                   See How it Work?</Button>
