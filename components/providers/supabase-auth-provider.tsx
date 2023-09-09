@@ -15,6 +15,7 @@ interface ContextI {
   mutate: any
   signOut: () => Promise<void>
   signInWithNotion: () => Promise<void>
+  signInWithEmail: (email: string, password: string) => Promise<void>
   reconnectToNotion: () => Promise<void>
   refreshToken: () => Promise<void>
 }
@@ -25,6 +26,7 @@ const Context = createContext<ContextI>({
   mutate: null,
   signOut: async () => { },
   signInWithNotion: async () => { },
+  signInWithEmail: async () => { },
   reconnectToNotion: async () => { },
   refreshToken: async () => { },
 })
@@ -70,6 +72,19 @@ export default function SupabaseAuthProvider({
   // Sign-In with Github
   const signInWithNotion = async () => {
     await supabase.auth.signInWithOAuth({ provider: 'notion' })
+  }
+
+
+  /**
+   * Description: Sign in with email and password.
+   * @param email
+   * @param password 
+   */
+  const signInWithEmail = async (email: string, password: string) => {
+    await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
   }
 
   const reconnectToNotion = async () => {
@@ -139,6 +154,7 @@ export default function SupabaseAuthProvider({
     mutate,
     signOut,
     signInWithNotion,
+    signInWithEmail,
     reconnectToNotion,
     refreshToken
   }

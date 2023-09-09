@@ -12,18 +12,26 @@ import {
 import { Login } from '@/components/Login'
 import { AfterLoginForm } from './forms/AfterLoginForm'
 import { useAuth } from '@/components/providers/supabase-auth-provider'
+import { LoginWithEmail } from './forms/LoginWithEmail'
 
 export function CardWithForm() {
   const { user } = useAuth()
   return (
     <Card className="w-[450px]">
+
       <CardHeader>
-        <CardTitle className="text-2xl">Import your playlist</CardTitle>
+        {!user && (
+          <CardTitle className="text-2xl">Login</CardTitle>
+        )}
+        {user && (
+          <CardTitle className="text-2xl">Import your playlist.</CardTitle>
+        )}
       </CardHeader>
       <CardContent>
         {!user && (
           <>
-            <Login />
+            <LoginWithEmail />
+            <Login login={false} />
           </>
         )}
 

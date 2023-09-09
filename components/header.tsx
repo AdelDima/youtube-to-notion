@@ -12,8 +12,8 @@ import { useAuth } from '@/components/providers/supabase-auth-provider'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { DropdownMenuDemo } from '@/components/UserDropdown'
-import { Github, Twitter } from 'lucide-react'
-import { ModeToggle } from '@/components/dark'
+import { ExternalLink, Github, Home, Twitter } from 'lucide-react'
+import Link from 'next/link'
 
 export function Header() {
   const { user } = useAuth()
@@ -49,24 +49,33 @@ export function Header() {
         </div>
 
         <nav className="flex items-center space-x-4 lg:space-x-6 mx-6">
+          <Link className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            href='/'
+          >
+            <Home className='w-4 h-4 mr-2' />
+            Home
+          </Link>
+
           <a
-            href="https://notionzone.lemonsqueezy.com"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            href="https://www.notionzone.net/templates"
+            className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             target="_blank"
           >
-            Templates
+            <ExternalLink className='w-4 h-4 mr-2' />
+            Notion Templates
           </a>
           <a
             href="https://dimalab.notion.site/Documentation-68db4e30a3634a48833d2037d0299985?pvs=4"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             target="_blank"
           >
+            <ExternalLink className='w-4 h-4 mr-2' />
             Documentation
           </a>
         </nav>
         <nav className="flex items-center mx-6">
           <a
-            href="https://twitter.com/TahriAdel"
+            href="https://twitter.com/notionzone"
             target="_blank"
             className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 py-2 w-9 px-0"
           >
@@ -79,7 +88,6 @@ export function Header() {
           >
             <Github />
           </a>
-          <ModeToggle />
         </nav>
 
         <NavigationMenu className="mr-4 hidden md:flex">
@@ -88,7 +96,7 @@ export function Header() {
 
             {!user && (
               <NavigationMenuItem>
-                <Login />
+                <Login login={true} />
               </NavigationMenuItem>
             )}
           </NavigationMenuList>

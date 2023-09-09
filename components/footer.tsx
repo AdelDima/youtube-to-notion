@@ -8,21 +8,13 @@ export function Footer() {
     <footer>
       <div className="container flex flex-col items-center justify-center py-8">
         <p className="text-sm text-muted-foreground">
-          Made with ❤️ by{' '}
+
           <a
-            href="https://twitter.com/TahriAdel"
+            href="https://twitter.com/notionzone"
             target="_blank"
             className="text-foreground"
           >
-            Adel Tahri
-          </a>{' '}
-          &{' '}
-          <a
-            href="https://twitter.com/Ahmed_phi"
-            target="_blank"
-            className="text-foreground"
-          >
-            Ahmed Bensalah
+            NotionZone
           </a>
         </p>
         <p className="text-sm text-muted-foreground">

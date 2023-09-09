@@ -6,13 +6,13 @@ import { Icons } from '@/components/icons'
 
 
 
-export function Login() {
+export function Login(props: { login: boolean }) {
 
   const { signInWithNotion } = useAuth()
   return (
     <Button className="w-full" onClick={signInWithNotion}>
       <Icons.notion className="w-5 h-5 mr-2" />
-      Connect with Notion
+      {props.login ? 'Login' : 'Register'} with Notion
     </Button>
   )
 }
