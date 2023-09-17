@@ -195,8 +195,12 @@ export function AfterLoginForm() {
   function importPlaylistNow(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
     return new Promise<void>(async (resolve) => {
-      const playlist_id: string = values.playlist.split('list=')[1]
 
+      const url = new URL(values.playlist);
+      const params = new URLSearchParams(url.search);
+      const playlist_id = params.get('list');
+
+      console.log(playlist_id)
       if (!playlist_id) {
         done()
         resolve()
