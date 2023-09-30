@@ -15,6 +15,7 @@ import {
 import { AspectRatio } from './ui/aspect-ratio'
 import { Youtube } from 'lucide-react'
 import { Badge } from "@/components/ui/badge"
+import Link from 'next/link'
 
 const formVariants = {
   hidden: {
@@ -44,6 +45,19 @@ export function Y2NSection() {
         animate="visible"
         exit="exit"
       >
+        <Link
+          href="https://www.producthunt.com/posts/notion-finance-tracker-goal-planner?utm_source=badge-featured&utm_medium=badge&utm_source=badge-notion-finance-tracker-goal-planner"
+          target="_blank"
+          className="inline-flex items-center  px-3 py-1 text-sm font-medium"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=416877&theme=light"
+            alt="Notion Finance Tracker Goal Planner - Streamline your finances, streamline your life | Product Hunt"
+            style={{ width: "250px", height: "54px" }}
+            width="250"
+            height="54"
+          />
+        </Link>
         <h1 className="text-5xl antialiased text-center">Youtube Playlist To Notion <Badge variant="outline" className='absolute'>2.0</Badge></h1>
         <p className="antialiased text-muted-foreground">
           Watch your favorite Youtube playlist without leaving Notion !

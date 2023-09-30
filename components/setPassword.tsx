@@ -44,7 +44,6 @@ export function SetPasswordCart() {
 
   type ValidationSchema = z.infer<typeof formSchema>
   const form = useForm<ValidationSchema>({
-
     resolver: zodResolver(formSchema as any),
     defaultValues: {
       password: '',
